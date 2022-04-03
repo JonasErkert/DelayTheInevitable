@@ -27,8 +27,8 @@ public class Boss : MonoBehaviour
 	private float _doorCloseAudioLength;
 	private float _walkAudioLength;
 	private float _appearancePause;
-
-	public float timeMultiplier = 1f;
+	private float _timeMultiplier = 1f;
+	
 	public bool hasBossAppeared = false;
 
 	// Start is called before the first frame update
@@ -78,7 +78,8 @@ public class Boss : MonoBehaviour
 	private void CalcBossAppearancePause()
 	{
 		float randomRange = doorOpenTimeStart * randomDeviationPercent / 100;
-		_appearancePause = doorOpenTimeStart * timeMultiplier + Random.Range(-randomRange, randomRange);
+		_timeMultiplier = 1 - GameManager.Instance.Difficulty;
+		_appearancePause = doorOpenTimeStart * _timeMultiplier + Random.Range(-randomRange, randomRange);
 
 		_appearancePause = Mathf.Clamp(_appearancePause, minBossPause, 9999f);
 	}
