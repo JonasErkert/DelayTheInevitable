@@ -19,8 +19,8 @@ public class Boss : MonoBehaviour
 	[SerializeField] private float bossVisibleDuration = 4f;
 	[SerializeField] private float bossUntilDisappearDuration = 1f;
 	[SerializeField] private float minBossPause = 30f;
-	
-	private Animator _doorAnimator;
+
+    private Animator _doorAnimator;
 	private Animator _bossAnimator;
 	private AudioSource _doorAudioSource;
 	private float _doorAudioLength;
