@@ -28,8 +28,8 @@ public class DesktopGameManager : MonoBehaviour
     [SerializeField]
     private Animator mailPopup;
 
-    [SerializeField]
-    public bool isWorkFinished;
+    [HideInInspector]
+    public bool isWorkFinished = false;
     private bool hasTask = false;
     private TaskMessage taskMessageScript;
 
@@ -109,6 +109,7 @@ public class DesktopGameManager : MonoBehaviour
 
     public void ResetProgress()
     {
+        isWorkFinished = false;
         keyProgressSlider.value = 0;
         progressbarFillImage.color = Color.red;
     }
