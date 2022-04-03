@@ -3,6 +3,13 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
+public enum GameState
+{
+    Menu,
+    Playing,
+    GameOver
+}
+
 public class GameManager : MonoBehaviour
 {
     #region singleton stuff
