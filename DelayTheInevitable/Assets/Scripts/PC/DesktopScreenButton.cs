@@ -7,35 +7,28 @@ public class DesktopScreenButton : MonoBehaviour
 {
     public UnityEvent buttonPressed;
 
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private SpriteRenderer highlightSprite;
+
+
+    private void OnEnable()
     {
+        OnMouseExit();
     }
 
-    // Update is called once per frame
-    void Update()
+
+    private void OnMouseEnter()
     {
-        
+        highlightSprite.color = new Color(highlightSprite.color.r, highlightSprite.color.g, highlightSprite.color.b, 0.5f);
     }
 
-
-    /*
-     *     public UnityEvent flipped;
- 
-    void Update() {
-        if (Input.GetKeyDown(KeyCode.Space)) Flip();
+    private void OnMouseExit()
+    {
+        highlightSprite.color = new Color(highlightSprite.color.r, highlightSprite.color.g, highlightSprite.color.b, 1);
     }
- 
-    void Flip() {
-        transform.localScale = new Vector3(-transform.localScale.x, 1, 1);
-        flipped.Invoke();
-    }
-
-     */
 
     private void OnMouseDown()
     {
         buttonPressed.Invoke();
-        Debug.Log("MOUSE DOWN");
     }
 }
