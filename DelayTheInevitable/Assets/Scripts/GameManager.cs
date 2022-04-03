@@ -73,9 +73,6 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1)) SetGameState(GameState.Menu);
         if (Input.GetKeyDown(KeyCode.Alpha2)) SetGameState(GameState.Playing);
         if (Input.GetKeyDown(KeyCode.Alpha3)) SetGameState(GameState.GameOver);
-
-        if (Input.GetKeyDown(KeyCode.T)) GameObject.Find("PC").GetComponentInChildren<DesktopGameManager>().StopWritingAndGiveTask("This is msg");
-        if (Input.GetKeyDown(KeyCode.Z)) GameObject.Find("PC").GetComponentInChildren<DesktopGameManager>().ContinueWriting();
     }
 
 
