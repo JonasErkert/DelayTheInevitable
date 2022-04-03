@@ -29,7 +29,7 @@ public class DesktopScreenManager : MonoBehaviour
 
     private void OpenGameScreen()
     {
-        DesktopScreenParent.SetActive(false);
+        //DesktopScreenParent.SetActive(false);
         GameScreenParent.SetActive(true);
         GameManager.Instance.gameScreenOpen = true;
     }
@@ -37,7 +37,7 @@ public class DesktopScreenManager : MonoBehaviour
     private void OpenDesktopScreen()
     {
         GameScreenParent.SetActive(false);
-        DesktopScreenParent.SetActive(true);
+        //DesktopScreenParent.SetActive(true);
         GameManager.Instance.gameScreenOpen = false;
     }
 

@@ -6,36 +6,48 @@ using UnityEngine.UI;
 
 public class DesktopGameManager : MonoBehaviour
 {
+    [Header("Word")]
     private int keysPressed = 0;
     [SerializeField]
     private Slider keyProgressSlider;
     [SerializeField]
     private int initialTaskKeyCount = 100;
-    private int maximalKeyCount = 100;
     [SerializeField]
     private Image progressbarFillImage;
-
-
+    
     [SerializeField]
     private TextMeshProUGUI textField;
     [SerializeField]
     private GameObject caret;
     private Coroutine caretCoroutine;
 
+    [Header("Mail")]
+    [SerializeField]
+    private float baseWorkTimespan;
+    private float currentWorkTimespan;
+    [SerializeField]
+    private Animator mailPopup;
+
+    [SerializeField]
+    public bool isWorkFinished;
+    private bool hasTask = false;
+    private TaskMessage taskMessageScript;
+
+
     private void Awake()
     {
-        // TODO GameState == Playing
-        caretCoroutine = StartCoroutine(CaretBlinking());
-
         keyProgressSlider.minValue = 0;
         keyProgressSlider.value = 0;
         keyProgressSlider.maxValue = initialTaskKeyCount;
-        maximalKeyCount = initialTaskKeyCount;
+
+        currentWorkTimespan = baseWorkTimespan;
+        taskMessageScript = GetComponent<TaskMessage>();
     }
 
     private void OnEnable()
     {
-        keyProgressSlider.maxValue = maximalKeyCount;
+        if(caret != null) caretCoroutine = StartCoroutine(CaretBlinking());
+        keyProgressSlider.maxValue = initialTaskKeyCount;
     }
 
     // Start is called before the first frame update
@@ -57,7 +69,7 @@ public class DesktopGameManager : MonoBehaviour
     private void CheckForWriting()
     {
         // TODO && GameState == Playing
-        if (Input.anyKeyDown && !GameManager.Instance.gameScreenOpen)
+        if (Input.anyKeyDown && !GameManager.Instance.gameScreenOpen && GameManager.Instance.GetGameState() == GameState.Playing && !hasTask)
         {
             if (caret != null)
             {
@@ -83,18 +95,39 @@ public class DesktopGameManager : MonoBehaviour
             keysPressed = Mathf.Clamp(keysPressed, 0, (int)keyProgressSlider.maxValue);
             keyProgressSlider.value = keysPressed;
 
-            if (keyProgressSlider.value >= keyProgressSlider.maxValue) progressbarFillImage.color = Color.green;
-            else progressbarFillImage.color = Color.red;
+            if (keyProgressSlider.value >= keyProgressSlider.maxValue)
+            {
+                isWorkFinished = true;
+                progressbarFillImage.color = Color.green;
+            }
+            else
+            {
+                progressbarFillImage.color = Color.red;
+            }
         }
     }
 
-    public void AddKeysAsWork(int keysToAdd)
+    public void ResetProgress()
     {
-        maximalKeyCount += keysToAdd;
-        keyProgressSlider.maxValue = maximalKeyCount;
+        keyProgressSlider.value = 0;
+        progressbarFillImage.color = Color.red;
+    }
+
+    public void StopWritingAndGiveTask(string message)
+    {
+        taskMessageScript.StartTask(message);
+
+        hasTask = true;
+    }
+
+    public void ContinueWriting()
+    {
+        taskMessageScript.StopTask();
+        hasTask = false;
     }
 
     #endregion
+
 
     // Update is called once per frame
     void Update()
