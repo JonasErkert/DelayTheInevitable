@@ -13,14 +13,38 @@ public class PlayerGameController : MonoBehaviour
     [SerializeField] private Transform _projectileSpawnPosition;
     [SerializeField] private GameObject _shieldPrefab;
     [SerializeField] private Image _shieldBarUI;
+    [SerializeField] private Image _lifeBarUI;
+    [SerializeField] private float _lifes = 10.0f;
+
+    private float _startLifes;
     private float _nextTimeToShoot;
 
     private bool _isShieldActive;
     private float _nextTimeToShield;
 
+    #region singleton stuff
+
+    private static PlayerGameController _instance;
+
+    public static PlayerGameController Instance
+    {
+        get { return _instance; }
+    }
+    #endregion
+    
     private void Awake()
     {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+        
         _shieldPrefab.transform.localScale = Vector3.zero;
+        _startLifes = _lifes;
     }
 
     void Update()
@@ -50,7 +74,8 @@ public class PlayerGameController : MonoBehaviour
         if (Time.time > _nextTimeToShoot)
         {
             _nextTimeToShoot = Time.time + _shootingCooldown;
-            Instantiate(_projectilePrefab,_projectileSpawnPosition.position,_projectileSpawnPosition.rotation);
+            GameObject tmpProjectile = Instantiate(_projectilePrefab,_projectileSpawnPosition.position,_projectileSpawnPosition.rotation);
+            tmpProjectile.SendMessage("IsProjectileFromPlayer",true);
         }
     }
 
@@ -94,5 +119,17 @@ public class PlayerGameController : MonoBehaviour
         }
         Debug.Log("done_Despawn");
         _isShieldActive = false;
+    }
+    
+    public void ApplyDamage(float damage)
+    {
+        if(!_isShieldActive){
+            _lifes -= damage;
+            _lifeBarUI.fillAmount = _lifes / _startLifes;
+            if (_lifes <= 0.0f)
+            {
+                //TODO: Broadcast player died in the GameGame
+            }
+        }
     }
 }

@@ -1,10 +1,20 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float _lifes = 10.0f;
+    [SerializeField] private float _fireRate = 1.5f;
+    [SerializeField] private GameObject _projectilePrefab;
+    [SerializeField] private Transform _projectileSpawnPosition;
+
+    private void Start()
+    {
+        StartCoroutine(ShootAtPlayer());
+    }
 
     public void ApplyDamage(float damage)
     {
@@ -12,6 +22,20 @@ public class Enemy : MonoBehaviour
         if (_lifes <= 0.0f)
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void Shoot()
+    {
+        Instantiate(_projectilePrefab,_projectileSpawnPosition.position,_projectileSpawnPosition.rotation);
+    }
+
+    IEnumerator ShootAtPlayer()
+    {
+        while (true)
+        {
+            Shoot();
+            yield return new WaitForSeconds(_fireRate);
         }
     }
 }

@@ -6,12 +6,12 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     [SerializeField] private float _speed = 5.0f;
+    [SerializeField] private float _damage = 5.0f;
     private bool _isFromPlayer;
 
-    public bool IsFromPlayer
+    public void IsProjectileFromPlayer(bool value)
     {
-        get => _isFromPlayer;
-        set => _isFromPlayer = value;
+        _isFromPlayer = value;
     }
 
     private void Awake()
@@ -21,14 +21,33 @@ public class Projectile : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(Vector3.right * _speed * Time.deltaTime);
+        if(_isFromPlayer){
+            transform.Translate(Vector3.right * _speed * Time.deltaTime);
+        }
+        else
+        {
+            float step = _speed * Time.deltaTime;
+            transform.position = Vector3.MoveTowards(transform.position,
+                PlayerGameController.Instance.gameObject.transform.position, step);
+            //transform.LookAt(PlayerGameController.Instance.gameObject.transform.position,Vector3.up);
+        }
     }
     
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy" && _isFromPlayer)
         {
-            collision.gameObject.SendMessage("ApplyDamage",5.0);
+            collision.gameObject.SendMessage("ApplyDamage",_damage);
+            Destroy(gameObject);
+        }
+        if (collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.SendMessage("ApplyDamage",_damage);
+            Destroy(gameObject);
+        }
+        if (collision.gameObject.tag == "EnemyProjectile" && _isFromPlayer)
+        {
+            Destroy(collision.gameObject);
             Destroy(gameObject);
         }
     }
