@@ -10,10 +10,12 @@ public class DesktopScreenManager : MonoBehaviour
     private GameObject DesktopScreenParent;
 
 
+
+
     // Start is called before the first frame update
     void Start()
     {
-        if(GameManager.Instance.gameScreenOpen)
+        if (GameManager.Instance.gameScreenOpen)
         {
             OpenGameScreen();
         }
@@ -22,7 +24,7 @@ public class DesktopScreenManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OpenGameScreen()
@@ -50,8 +52,8 @@ public class DesktopScreenManager : MonoBehaviour
         if (!GameManager.Instance.gameScreenOpen) OpenGameScreen();
     }
 
-    public void ClickedTaskbarDesktop()
-    {
-        if (GameManager.Instance.gameScreenOpen) OpenDesktopScreen();
-    }
+    //public void ClickedTaskbarDesktop()
+    //{
+    //    if (GameManager.Instance.gameScreenOpen) OpenDesktopScreen();
+    //}
 }
