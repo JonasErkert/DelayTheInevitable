@@ -9,13 +9,13 @@ public class Boss : MonoBehaviour
 {
 	[SerializeField] private GameObject door;
 	[SerializeField] private GameObject bossRotationObject;
-	[SerializeField] private float doorOpenTimeStart = 60f;
-	[SerializeField] private float randomDeviationPercent = 10f;
 	[SerializeField] private AudioClip walkAudioClip;
 	[SerializeField] private AudioClip doorOpenAudioClip;
 	[SerializeField] private AudioClip doorCloseAudioClip;
 	
 	[Header("Wait Durations")]
+	[SerializeField] private float doorOpenTimeStart = 60f;
+	[SerializeField] private float randomDeviationPercent = 10f;
 	[SerializeField] private float bossVisibleDuration = 4f;
 	[SerializeField] private float bossUntilDisappearDuration = 1f;
 	[SerializeField] private float minBossPause = 30f;
