@@ -44,9 +44,14 @@ public class Boss : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (Input.GetKeyUp(KeyCode.A))
+		//Debugging
+		//if (Input.GetKeyUp(KeyCode.A))
+		//{
+		//	StartBossDoor();
+		//}
+		if (hasBossAppeared && GameManager.Instance.GetGameState() == GameState.Playing &&GameManager.Instance.gameScreenOpen)
 		{
-			StartBossDoor();
+			GameManager.Instance.SetGameState(GameState.GameOver);
 		}
 	}
 
