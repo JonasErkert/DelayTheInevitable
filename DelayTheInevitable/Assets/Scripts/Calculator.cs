@@ -17,7 +17,8 @@ public class Calculator : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(_inputString))
         {
-            _inputString += number;
+            if(_inputString.Length < 4) //Limit input to 9999 max
+                _inputString += number;
         }
         else
         {
