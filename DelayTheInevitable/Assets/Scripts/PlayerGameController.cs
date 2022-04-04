@@ -49,23 +49,24 @@ public class PlayerGameController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.RotateAround(transform.position,Vector3.forward,_rotSpeed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.RotateAround(transform.position,Vector3.back,_rotSpeed * Time.deltaTime);
-        }
+        if(GameManager.Instance.gameScreenOpen){
+            if (Input.GetKey(KeyCode.A))
+            {
+                transform.RotateAround(transform.position,Vector3.forward,_rotSpeed * Time.deltaTime);
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                transform.RotateAround(transform.position,Vector3.back,_rotSpeed * Time.deltaTime);
+            }
 
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            Shoot();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            UseShield();
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                Shoot();
+            }
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                UseShield();
+            }
         }
     }
 
