@@ -45,17 +45,21 @@ public class GameManager : MonoBehaviour
 
     [Header("Timer")]
     [SerializeField] private float secondsToMaxDifficulty = 180f;
-    [SerializeField] private TextMeshProUGUI timerText;
     private TimeSpan _timePlaying;
     private bool _timerRunning = false;
     private float _elapsedTime = 0f;
     private float _difficulty = 0;
     
-    [Header("Game Over")]
+    [Header("UI")]
+    [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private GameObject gameOverUI;
+    [SerializeField] private GameObject timerUI;
+    [SerializeField] private GameObject startMenuUI;
+    [SerializeField] private GameObject descriptionUI;
+    private bool _isDescriptionOpen = false;
+    
+    [Header("Misc")]
     [SerializeField] private GameObject officeLights;
-    private bool temp = false;
-
     private GameState _gameState = GameState.Menu;
 
     [Header("Script Connections")]
@@ -75,7 +79,6 @@ public class GameManager : MonoBehaviour
         //DontDestroyOnLoad(this);
 
         SetGameState(GameState.Menu);
-        BeginTimer();
     }
 
     // Update is called once per frame
@@ -85,10 +88,14 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1)) SetGameState(GameState.Menu);
         if (Input.GetKeyDown(KeyCode.Alpha2)) SetGameState(GameState.Playing);
         if (Input.GetKeyDown(KeyCode.Alpha3)) SetGameState(GameState.GameOver);
-        if (Input.GetKeyDown(KeyCode.Alpha4))
+
+        if (_isDescriptionOpen)
         {
-            temp = !temp;
-            ToggleGameOver(temp);
+            if (Input.anyKeyDown)
+            {
+                ToggleDescriptionUI(false);
+                SetGameState(GameState.Playing);
+            }
         }
 
         if (desktopManagerScript.isWorkFinished && countdownScript.hasTimerFinished)
@@ -134,13 +141,16 @@ public class GameManager : MonoBehaviour
 
     public void StartMenuState()
     {
-        // TODO
+        // TODO: Is something in here?
     }
     
     public void StartPlayState()
     {
+        BeginTimer();
         bossScript.StartBossDoor();
         countdownScript.BeginTimer();
+        ToggleOfficeLights(true);
+        ToggleTimerUI(true);
     }
 
     public void ResetPlayState()
@@ -148,6 +158,8 @@ public class GameManager : MonoBehaviour
         Difficulty = 0;
         countdownScript.ResetTimer();
         bossScript.ResetBossDoor();
+        ToggleTimerUI(false);
+        ToggleGameOverUI(true);
     }
     
     public void BeginTimer()
@@ -163,10 +175,21 @@ public class GameManager : MonoBehaviour
         _timerRunning = false;
     }
 
-    public void ToggleGameOver(bool isGameOver)
+    public void ToggleGameOverUI(bool isGameOver)
     {
         gameOverUI.SetActive(isGameOver);
-        officeLights.SetActive(!isGameOver);
+        ToggleOfficeLights(!isGameOver);
+    }
+
+    public void ToggleOfficeLights(bool isLightEnabled)
+    {
+        officeLights.SetActive(isLightEnabled);
+    }
+
+    public void StartGame()
+    {
+        ToggleStartMenuUI(false);
+        ToggleDescriptionUI(true);
     }
 
     public void QuitGame()
@@ -177,6 +200,22 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void ToggleStartMenuUI(bool isShowingStart)
+    {
+        startMenuUI.SetActive(isShowingStart);
+    }
+
+    public void ToggleDescriptionUI(bool isShowingDescription)
+    {
+        descriptionUI.SetActive(isShowingDescription);
+        _isDescriptionOpen = isShowingDescription;
+    }
+
+    public void ToggleTimerUI(bool isShowingTimer)
+    {
+        timerUI.SetActive(isShowingTimer);
     }
 
     private IEnumerator UpdateTimer()

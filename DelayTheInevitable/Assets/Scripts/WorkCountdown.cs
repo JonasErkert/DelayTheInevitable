@@ -56,7 +56,7 @@ public class WorkCountdown : MonoBehaviour
 
             _timeRemaining = _startTimeSpan - TimeSpan.FromSeconds(_elapsedTime);
 
-            if (_timeRemaining.Seconds <= 0)
+            if (_timeRemaining.TotalSeconds <= 0)
             {
                 hasTimerFinished = true;
                 timerText.text = "00:00";

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2412357241974875895}
   - component: {fileID: 2412357241974875894}
-  - component: {fileID: 5481210933264604763}
   - component: {fileID: 4088620369627870471}
   - component: {fileID: 721085312243549969}
   m_Layer: 0
@@ -47,27 +46,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameScreenOpen: 1
+  isWorkingOnTask: 0
+  workMailAnimation: {fileID: 0}
   secondsToMaxDifficulty: 100
   timerText: {fileID: 0}
   gameOverUI: {fileID: 0}
+  timerUI: {fileID: 0}
+  startMenuUI: {fileID: 0}
+  descriptionUI: {fileID: 0}
   officeLights: {fileID: 0}
   bossScript: {fileID: 0}
   countdownScript: {fileID: 0}
   desktopManagerScript: {fileID: 0}
---- !u!114 &5481210933264604763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2412357241974875881}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cabff99f6d6ece469e47ea4cf3a9a4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bossScript: {fileID: 0}
-  desktopManager: {fileID: 0}
 --- !u!114 &4088620369627870471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,3 +83,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f131b9f15b58b824980a2b00768dd757, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  calculatorTask: {fileID: 0}
+  ecoModeTask: {fileID: 0}
+  initialTaskSpawnTime: 10
