@@ -24,27 +24,30 @@ public class EnemySpawner : MonoBehaviour
 
     private SpawnDifficulties _currentSpawnDifficulty;
     private int _indexDifficulty = -1; //start at -1 to init in Start to 0
-
-    private void Start()
-    {
-        UpdateCurrentDiffitultyRange();
-    }
+    private bool _startSpawning;
 
     // Update is called once per frame
     void Update()
     {
-        if (_currentSpawnDifficulty.difficultyRange.y < GameManager.Instance.Difficulty)
+        //Init to start spawning 
+        if (GameManager.Instance.GetGameState() == GameState.Playing && !_startSpawning)
         {
-            StopAllCoroutines();
+            _startSpawning = true;
             UpdateCurrentDiffitultyRange();
         }
-        
+        if(_startSpawning){
+            if (_currentSpawnDifficulty.difficultyRange.y < GameManager.Instance.Difficulty)
+            {
+                StopAllCoroutines();
+                UpdateCurrentDiffitultyRange();
+            }
+        }
         
         //For Debugging Key Spawn
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            SpawnEnemy();
-        }
+        //if (Input.GetKeyDown(KeyCode.K))
+        //{
+        //    SpawnEnemy();
+        //}
     }
 
     private void UpdateCurrentDiffitultyRange()

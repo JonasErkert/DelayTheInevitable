@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class DesktopGameTutorial : MonoBehaviour
 {
-    void Start()
+    private bool _triggerdTutorial;
+    void Update()
     {
-        Destroy(gameObject,3.0f);
+        if (GameManager.Instance.GetGameState() == GameState.Playing && GameManager.Instance.gameScreenOpen && !_triggerdTutorial)
+        {
+            _triggerdTutorial = true;
+            Destroy(gameObject,4.0f);
+        }
     }
- 
     
+
 }

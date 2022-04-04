@@ -18,7 +18,9 @@ public class PlayerGameController : MonoBehaviour
     [SerializeField] private Image _lifeBarUI;
     [SerializeField] private float _lifes = 10.0f;
 
-    [SerializeField] private TextMeshProUGUI _killCounterUI;
+    public float Lifes => _lifes;
+
+    private TextMeshProUGUI _killCounterUI;
 
     [Header("Shield Settings")] 
     [SerializeField] private float _shieldUpTime = 2.0f;
