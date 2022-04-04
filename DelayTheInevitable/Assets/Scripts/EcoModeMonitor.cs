@@ -2,13 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EcoModeMonitor : MonoBehaviour
 {
-    [SerializeField] private Material monitorScreen;
+    [SerializeField] private Image monitorScreen;
     [SerializeField] private Light indicatorLight;
     [SerializeField] private float fadeDuration = 2.0f;
     private bool isInEcoMode = false;
+
+    [SerializeField] private DesktopGameManager desktopManager;
 
     private void Update()
     {
@@ -39,7 +42,7 @@ public class EcoModeMonitor : MonoBehaviour
         }
     }
 
-    private void ActivateEcoMode()
+    public void ActivateEcoMode()
     {
         isInEcoMode = true;
         StopAllCoroutines();
@@ -51,6 +54,8 @@ public class EcoModeMonitor : MonoBehaviour
         isInEcoMode = false;
         StopAllCoroutines();
         StartCoroutine(FadeMonitor(true, fadeDuration));
+        desktopManager.ContinueWriting();
+        GameManager.Instance.isWorkingOnTask = false;
     }
 
 
@@ -63,12 +68,12 @@ public class EcoModeMonitor : MonoBehaviour
         {
             if (fadeIn)
             {
-                monitorScreen.color = Color.Lerp(startColorMonitor, Color.white, elapsed);
+                monitorScreen.color = Color.Lerp(startColorMonitor, new Color(startColorMonitor.r, startColorMonitor.g, startColorMonitor.b, 0), elapsed);
                 indicatorLight.color = Color.Lerp(startColorIndicator, Color.green, elapsed);
             }
             else
             {
-                monitorScreen.color = Color.Lerp(startColorMonitor, Color.black, elapsed);
+                monitorScreen.color = Color.Lerp(startColorMonitor, new Color(startColorMonitor.r, startColorMonitor.g, startColorMonitor.b, 1), elapsed);
                 indicatorLight.color = Color.Lerp(startColorIndicator, Color.yellow, elapsed);
             }
             elapsed += Time.deltaTime;
