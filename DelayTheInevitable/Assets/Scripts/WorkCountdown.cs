@@ -30,6 +30,9 @@ public class WorkCountdown : MonoBehaviour
     
     public void BeginTimer()
     {
+        float difficulty = GameManager.Instance.Difficulty;
+
+        _startTimeSpan = new TimeSpan(0, 0, Mathf.FloorToInt(startTimeSeconds - difficulty * startTimeSeconds * 0.75f));
         _timerRunning = true;
         _elapsedTime = 0f;
 
