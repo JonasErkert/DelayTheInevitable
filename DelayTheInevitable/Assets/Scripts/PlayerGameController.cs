@@ -40,6 +40,7 @@ public class PlayerGameController : MonoBehaviour
 
     private bool _isShieldActive;
     private float _nextTimeToShield;
+    private bool _randomColor;
 
     #region singleton stuff
 
@@ -87,6 +88,11 @@ public class PlayerGameController : MonoBehaviour
             {
                 UseShield();
             }
+
+            if (Input.GetKeyDown(KeyCode.Alpha9))
+            {
+                _randomColor = true;
+            }
         }
 
         if (!_isShieldActive)
@@ -104,6 +110,10 @@ public class PlayerGameController : MonoBehaviour
             _nextTimeToShoot = Time.time + _shootingCooldown;
             GameObject tmpProjectile = Instantiate(_projectilePrefab,_projectileSpawnPosition.position,_projectileSpawnPosition.rotation);
             tmpProjectile.SendMessage("IsProjectileFromPlayer",true);
+            if (_randomColor)
+            {
+                tmpProjectile.GetComponentInChildren<SpriteRenderer>().color = Random.ColorHSV();
+            }
         }
     }
 
