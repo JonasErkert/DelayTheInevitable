@@ -141,7 +141,7 @@ public class PlayerGameController : MonoBehaviour
         while (elapsed < fadeDuration)
         {
             _shieldPrefab.transform.localScale = Vector3.Lerp(Vector3.one * 0.6f,Vector3.zero, elapsed/fadeDuration);
-            //_shieldBarUI.fillAmount = Mathf.Lerp(1, 0, elapsed/fadeDuration);
+            _shieldBarUI.fillAmount = Mathf.Lerp(1, 0, elapsed/fadeDuration);
             elapsed += Time.deltaTime;
             yield return null;
         }

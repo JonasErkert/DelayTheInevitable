@@ -82,7 +82,7 @@ public class EnemySpawner : MonoBehaviour
     private IEnumerator SpawnEnemysTimed(float spawnFrequenzy)
     {
         if(_indexDifficulty == 0)
-            yield return new WaitForSeconds(3.0f); //wait for the tutorial screen
+            yield return new WaitForSeconds(5.0f); //wait for the tutorial screen
         while (true)
         {
             SpawnEnemy();

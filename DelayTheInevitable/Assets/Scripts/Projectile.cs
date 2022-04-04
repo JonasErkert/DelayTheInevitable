@@ -45,7 +45,11 @@ public class Projectile : MonoBehaviour
         {
             collision.gameObject.SendMessage("ApplyDamage",_damage);
             Destroy(gameObject);
+        }else if (collision.gameObject.tag == "Shield")
+        {
+            Destroy(gameObject);
         }
+            
         if (collision.gameObject.tag == "EnemyProjectile" && _isFromPlayer)
         {
             Destroy(collision.gameObject);
