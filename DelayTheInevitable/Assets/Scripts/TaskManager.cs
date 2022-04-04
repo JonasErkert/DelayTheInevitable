@@ -7,9 +7,11 @@ public class TaskManager : MonoBehaviour
     [SerializeField]
     private CalculatorTask calculatorTask;
     [SerializeField]
+    private EcoModeMonitor ecoModeTask;
+    [SerializeField]
     private float initialTaskSpawnTime = 30f;
     
-    private int tasksAmount = 0;
+    private int tasksAmount = 2;
 
 
     private bool taskTimerStarted = false;
@@ -35,15 +37,15 @@ public class TaskManager : MonoBehaviour
         float timeToWait = (initialTaskSpawnTime - (GameManager.Instance.Difficulty * (initialTaskSpawnTime / 2))) + Random.Range(-5f, 5f);
         Debug.Log(timeToWait);
         yield return new WaitForSeconds(timeToWait);
-        int randomTask = Random.Range(0, 1);
+        int randomTask = Random.Range(0, tasksAmount);
 
         switch (randomTask)
         {
             case 0:
-                Debug.Log("TASK STARTED");
                 calculatorTask.StartCalculatorTask();
                 break;
             case 1:
+                ecoModeTask.ActivateEcoMode();
                 break;
             case 2:
                 break;
