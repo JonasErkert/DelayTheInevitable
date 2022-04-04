@@ -8,6 +8,8 @@ public class WorkCountdown : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private int startTimeSeconds;
 
+    public bool hasTimerFinished = false;
+
     private TimeSpan _startTimeSpan;
     private TimeSpan _timeRemaining;
     private bool _timerRunning = false;
@@ -17,6 +19,7 @@ public class WorkCountdown : MonoBehaviour
     void Start()
     {
         _startTimeSpan = new TimeSpan(0, 0, startTimeSeconds);
+        timerText.text = _startTimeSpan.ToString("mm':'ss");
     }
 
     // Update is called once per frame
@@ -41,8 +44,8 @@ public class WorkCountdown : MonoBehaviour
     public void ResetTimer()
     {
         StopAllCoroutines();
-        _elapsedTime = 0f;
         timerText.text = _startTimeSpan.ToString("mm':'ss");
+        hasTimerFinished = false;
     }
 
     private IEnumerator UpdateTimer()
@@ -52,9 +55,17 @@ public class WorkCountdown : MonoBehaviour
             _elapsedTime += Time.deltaTime;
 
             _timeRemaining = _startTimeSpan - TimeSpan.FromSeconds(_elapsedTime);
-            
-            string timePlayingString = _timeRemaining.ToString("mm':'ss");
-            timerText.text = timePlayingString;
+
+            if (_timeRemaining.Seconds <= 0)
+            {
+                hasTimerFinished = true;
+                timerText.text = "00:00";
+            }
+            else
+            {
+                string timePlayingString = _timeRemaining.ToString("mm':'ss");
+                timerText.text = timePlayingString;
+            }
 
             yield return null;
         }
