@@ -10,7 +10,7 @@ public class PlayerGameController : MonoBehaviour
 {
     [SerializeField] private float _rotSpeed = 200.0f;
     [SerializeField] private float _shootingCooldown = 1.0f;
-    [SerializeField] private float _shieldCooldown = 15.0f;
+   
     [SerializeField] private GameObject _projectilePrefab;
     [SerializeField] private Transform _projectileSpawnPosition;
     [SerializeField] private GameObject _shieldPrefab;
@@ -23,6 +23,7 @@ public class PlayerGameController : MonoBehaviour
     [Header("Shield Settings")] 
     [SerializeField] private float _shieldUpTime = 2.0f;
     [SerializeField] private float _shieldFadeOutTime = 5.0f;
+    [SerializeField] private float _shieldCooldown = 10.0f;
     
     [Header("Audio")] [SerializeField] private AudioClip[] _audioClips;
 
@@ -120,7 +121,7 @@ public class PlayerGameController : MonoBehaviour
         while (elapsed < duration)
         {
             _shieldPrefab.transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one * 0.6f, elapsed/duration);
-            _shieldBarUI.fillAmount = Mathf.Lerp(0, 1, elapsed/duration);
+            //_shieldBarUI.fillAmount = Mathf.Lerp(0, 1, elapsed/duration);
             elapsed += Time.deltaTime;
             yield return null;
         }
@@ -137,7 +138,7 @@ public class PlayerGameController : MonoBehaviour
         while (elapsed < fadeDuration)
         {
             _shieldPrefab.transform.localScale = Vector3.Lerp(Vector3.one * 0.6f,Vector3.zero, elapsed/fadeDuration);
-            _shieldBarUI.fillAmount = Mathf.Lerp(1, 0, elapsed/fadeDuration);
+            //_shieldBarUI.fillAmount = Mathf.Lerp(1, 0, elapsed/fadeDuration);
             elapsed += Time.deltaTime;
             yield return null;
         }
