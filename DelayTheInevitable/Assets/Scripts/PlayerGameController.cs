@@ -16,6 +16,9 @@ public class PlayerGameController : MonoBehaviour
     [SerializeField] private Image _lifeBarUI;
     [SerializeField] private float _lifes = 10.0f;
 
+    private int _enemyKills = 0;
+    
+
     private float _startLifes;
     private float _nextTimeToShoot;
 
@@ -84,7 +87,7 @@ public class PlayerGameController : MonoBehaviour
     {
         if (Time.time > _nextTimeToShield && !_isShieldActive)
         {
-            StartCoroutine(CreateShield(1.0f));
+            StartCoroutine(CreateShield(0.5f));
             _isShieldActive = true;
             _nextTimeToShield = Time.time + _shieldCooldown;
         }
@@ -132,5 +135,10 @@ public class PlayerGameController : MonoBehaviour
                 //TODO: Broadcast player died in the GameGame
             }
         }
+    }
+
+    public void AddKillToCounter()
+    {
+        _enemyKills++;
     }
 }
