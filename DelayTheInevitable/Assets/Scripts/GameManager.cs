@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public enum GameState
 {
@@ -39,18 +38,12 @@ public class GameManager : MonoBehaviour
 
     public bool gameScreenOpen = true;
 
-    [Header("Timer")]
     [SerializeField] private float secondsToMaxDifficulty = 180f;
     [SerializeField] private TextMeshProUGUI timerText;
     private TimeSpan _timePlaying;
     private bool _timerRunning = false;
     private float _elapsedTime = 0f;
     private float _difficulty = 0;
-    
-    [Header("Game Over")]
-    [SerializeField] private GameObject gameOverUI;
-    [SerializeField] private GameObject officeLights;
-    private bool temp = false;
 
     private GameState _gameState = GameState.Menu;
 
@@ -68,7 +61,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //DontDestroyOnLoad(this);
+        DontDestroyOnLoad(this);
 
         SetGameState(GameState.Menu);
         BeginTimer();
@@ -81,11 +74,6 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1)) SetGameState(GameState.Menu);
         if (Input.GetKeyDown(KeyCode.Alpha2)) SetGameState(GameState.Playing);
         if (Input.GetKeyDown(KeyCode.Alpha3)) SetGameState(GameState.GameOver);
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            temp = !temp;
-            ToggleGameOver(temp);
-        }
 
         if (desktopManagerScript.isWorkFinished && countdownScript.hasTimerFinished)
         {
@@ -108,6 +96,7 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
 
     public void SetGameState(GameState state)
     {
@@ -157,22 +146,6 @@ public class GameManager : MonoBehaviour
     public void EndTimer()
     {
         _timerRunning = false;
-    }
-
-    public void ToggleGameOver(bool isGameOver)
-    {
-        gameOverUI.SetActive(isGameOver);
-        officeLights.SetActive(!isGameOver);
-    }
-
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
-
-    public void RestartGame()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private IEnumerator UpdateTimer()
