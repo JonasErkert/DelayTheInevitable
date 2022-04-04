@@ -27,7 +27,7 @@ public class Projectile : MonoBehaviour
         }
         else
         {
-            float step = _speed * Time.deltaTime;
+            float step = _speed* 0.5f * Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position,
                 PlayerGameController.Instance.gameObject.transform.position, step);
             //transform.LookAt(PlayerGameController.Instance.gameObject.transform.position,Vector3.up);
