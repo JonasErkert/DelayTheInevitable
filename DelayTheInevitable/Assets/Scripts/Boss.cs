@@ -51,7 +51,7 @@ public class Boss : MonoBehaviour
 		//}
 		if (hasBossAppeared && GameManager.Instance.GetGameState() == GameState.Playing &&GameManager.Instance.gameScreenOpen)
 		{
-			GameManager.Instance.SetGameState(GameState.GameOver);
+			GameManager.Instance.SetGameOverReason(GameOverReason.CaughtByBoss);
 		}
 	}
 

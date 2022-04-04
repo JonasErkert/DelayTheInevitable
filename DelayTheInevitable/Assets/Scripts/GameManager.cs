@@ -11,6 +11,13 @@ public enum GameState
     GameOver
 }
 
+public enum GameOverReason
+{
+    GameLost,
+    DeadlineReached,
+    CaughtByBoss
+}
+
 public class GameManager : MonoBehaviour
 {
     #region singleton stuff
@@ -53,6 +60,8 @@ public class GameManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private GameObject gameOverUI;
+    [SerializeField] private TextMeshProUGUI gameOverScoreText;
+    [SerializeField] private TextMeshProUGUI gameOverReasonText;
     [SerializeField] private GameObject timerUI;
     [SerializeField] private GameObject startMenuUI;
     [SerializeField] private GameObject descriptionUI;
@@ -61,6 +70,7 @@ public class GameManager : MonoBehaviour
     [Header("Misc")]
     [SerializeField] private GameObject officeLights;
     private GameState _gameState = GameState.Menu;
+    private GameOverReason _gameOverReason = GameOverReason.DeadlineReached;
 
     [Header("Script Connections")]
     [SerializeField] private Boss bossScript;
@@ -109,7 +119,7 @@ public class GameManager : MonoBehaviour
         {
             if (countdownScript.hasTimerFinished)
             {
-                SetGameState(GameState.GameOver);
+                SetGameOverReason(GameOverReason.DeadlineReached);
             }
             else
             {
@@ -139,6 +149,13 @@ public class GameManager : MonoBehaviour
     }
     public GameState GetGameState() { return _gameState; }
 
+    public void SetGameOverReason(GameOverReason reason)
+    {
+        _gameOverReason = reason;
+        SetGameState(GameState.GameOver);
+    }
+    public GameOverReason GetGameOverReason() { return _gameOverReason; }
+
     public void StartMenuState()
     {
         // TODO: Is something in here?
@@ -159,7 +176,27 @@ public class GameManager : MonoBehaviour
         countdownScript.ResetTimer();
         bossScript.ResetBossDoor();
         ToggleTimerUI(false);
+
+        string reasonText = "Game Over";
+        switch (_gameOverReason)
+        {
+            case GameOverReason.GameLost:
+                reasonText = "GAME Lost!";
+                break;
+            case GameOverReason.DeadlineReached:
+                reasonText = "DEADLINE reached!";
+                break;
+            case GameOverReason.CaughtByBoss:
+                reasonText = "CAUGHT by Boss!";
+                break;
+        }
+
+        gameOverReasonText.text = reasonText;
         ToggleGameOverUI(true);
+        
+        _timePlaying = TimeSpan.FromSeconds(_elapsedTime);
+        string timePlayingString = "delayed work by " + _timePlaying.ToString("mm':'ss");
+        gameOverScoreText.text = timePlayingString;
     }
     
     public void BeginTimer()

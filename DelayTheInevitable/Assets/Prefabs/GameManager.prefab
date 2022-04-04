@@ -51,6 +51,8 @@ MonoBehaviour:
   secondsToMaxDifficulty: 100
   timerText: {fileID: 0}
   gameOverUI: {fileID: 0}
+  gameOverScoreText: {fileID: 0}
+  gameOverReasonText: {fileID: 0}
   timerUI: {fileID: 0}
   startMenuUI: {fileID: 0}
   descriptionUI: {fileID: 0}
