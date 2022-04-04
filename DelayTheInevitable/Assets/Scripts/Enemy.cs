@@ -27,7 +27,7 @@ public class Enemy : MonoBehaviour
 
     private void Shoot()
     {
-        Instantiate(_projectilePrefab,_projectileSpawnPosition.position,_projectileSpawnPosition.rotation);
+        Instantiate(_projectilePrefab,_projectileSpawnPosition.position,transform.rotation);
     }
 
     IEnumerator ShootAtPlayer()
