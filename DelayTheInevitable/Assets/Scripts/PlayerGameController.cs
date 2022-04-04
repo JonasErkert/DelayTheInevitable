@@ -20,6 +20,7 @@ public class PlayerGameController : MonoBehaviour
 
     public float Lifes => _lifes;
 
+    [SerializeField]
     private TextMeshProUGUI _killCounterUI;
 
     [Header("Shield Settings")] 

@@ -2327,6 +2327,7 @@ MonoBehaviour:
   _shieldBarUI: {fileID: 7857811324357271414}
   _lifeBarUI: {fileID: 4227730462817926077}
   _lifes: 100
+  _killCounterUI: {fileID: 200862954}
   _shieldUpTime: 2
   _shieldFadeOutTime: 5
   _shieldCooldown: 10
