@@ -7,11 +7,17 @@ using UnityEngine;
 public class Calculator : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI inputText;
+    private CalculatorTask task;
     private float _input1;
     private float _input2;
     private string _inputString;
     private string _operation;
     private float _result;
+
+    private void Start()
+    {
+        task = GetComponent<CalculatorTask>();
+    }
 
     public void ClickNumber(int number)
     {
@@ -57,7 +63,11 @@ public class Calculator : MonoBehaviour
                     _result = _input1 * _input2;
                     break;
             }
-            inputText.text = _result.ToString();
+
+            task.CheckResult((int)_input1, _operation, (int)_input2, _result);
+
+            if(_result == (int)_result) inputText.text = _result.ToString();
+            else inputText.text = _result.ToString("F2");
         }
     }
     public void Clear()

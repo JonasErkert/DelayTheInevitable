@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     public bool gameScreenOpen = true;
+    public bool isWorkingOnTask = false;
 
     [Header("Timer")]
     [SerializeField] private float secondsToMaxDifficulty = 180f;
