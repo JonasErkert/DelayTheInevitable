@@ -48,7 +48,7 @@ MonoBehaviour:
   gameScreenOpen: 1
   isWorkingOnTask: 0
   workMailAnimation: {fileID: 0}
-  secondsToMaxDifficulty: 100
+  secondsToMaxDifficulty: 360
   timerText: {fileID: 0}
   gameOverUI: {fileID: 0}
   gameOverScoreText: {fileID: 0}
@@ -87,4 +87,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   calculatorTask: {fileID: 0}
   ecoModeTask: {fileID: 0}
-  initialTaskSpawnTime: 10
+  initialTaskSpawnTime: 30

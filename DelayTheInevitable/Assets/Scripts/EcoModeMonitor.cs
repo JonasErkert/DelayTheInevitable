@@ -8,6 +8,7 @@ public class EcoModeMonitor : MonoBehaviour
 {
     [SerializeField] private Image monitorScreen;
     [SerializeField] private SpriteRenderer indicatorLight;
+    [SerializeField] private GameObject ecoModeHint;
     [SerializeField] private float fadeDuration = 2.0f;
     private bool isInEcoMode = false;
 
@@ -47,6 +48,7 @@ public class EcoModeMonitor : MonoBehaviour
         isInEcoMode = true;
         StopAllCoroutines();
         StartCoroutine(FadeMonitor(false, fadeDuration));
+        ecoModeHint.SetActive(true);
     }
 
     private void DeactivateEcoMode()
@@ -56,6 +58,7 @@ public class EcoModeMonitor : MonoBehaviour
         StartCoroutine(FadeMonitor(true, fadeDuration));
         desktopManager.ContinueWriting();
         GameManager.Instance.isWorkingOnTask = false;
+        ecoModeHint.SetActive(false);
     }
 
 
