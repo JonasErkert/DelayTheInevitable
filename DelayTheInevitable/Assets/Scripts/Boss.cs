@@ -16,6 +16,7 @@ public class Boss : MonoBehaviour
 	[SerializeField] private float doorOpenTimeStart = 60f;
 	[SerializeField] private float randomDeviationPercent = 10f;
 	[SerializeField] private float bossVisibleDuration = 4f;
+	[SerializeField] private float bossUntilAppearDuration = 1.5f;
 	[SerializeField] private float bossUntilDisappearDuration = 1f;
 	[SerializeField] private float minBossPause = 30f;
 
@@ -68,8 +69,7 @@ public class Boss : MonoBehaviour
 
 	private void PlayBossSteps()
 	{
-		_doorAudioSource.clip = walkAudioClip;
-		_doorAudioSource.Play();
+		_doorAudioSource.PlayOneShot(walkAudioClip, 1f);
 	}
 
 	private void ToggleBossRotation(bool isAppearing)
@@ -80,8 +80,7 @@ public class Boss : MonoBehaviour
 	private void ToggleDoor(bool isOpen)
 	{
 		_doorAnimator.SetTrigger(isOpen ? "Open" : "Close");
-		_doorAudioSource.clip = isOpen ? doorOpenAudioClip : doorCloseAudioClip;
-		_doorAudioSource.Play();
+		_doorAudioSource.PlayOneShot(isOpen ? doorOpenAudioClip : doorCloseAudioClip, 2.5f);
 	}
 
 	private void CalcBossAppearancePause()
@@ -99,7 +98,7 @@ public class Boss : MonoBehaviour
 		PlayBossSteps();
 		yield return new WaitForSeconds(_walkAudioLength);
 		ToggleDoor(true);
-		yield return new WaitForSeconds(_doorAudioLength);
+		yield return new WaitForSeconds(_doorAudioLength + bossUntilAppearDuration);
 		ToggleBossRotation(true);
 		hasBossAppeared = true;
 		yield return new WaitForSeconds(bossVisibleDuration);
