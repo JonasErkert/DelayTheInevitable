@@ -5,28 +5,63 @@ using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+
+[Serializable]
+public struct SpawnDifficulties
+{
+    public Vector2 difficultyRange;
+    public float spawnFrequenzy;
+    public GameObject enemyPrefab;
+}
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject _enemyPrefab;
+    private GameObject _enemyPrefab;
 
     [SerializeField] private Transform _spawnAreaMin;
     [SerializeField] private Transform _spawnAreaMax;
     [SerializeField] private float _distanceToPlayer = 2.0f;
-    
+    [SerializeField] private SpawnDifficulties[] _spawnDifficulties;
+
+    private SpawnDifficulties _currentSpawnDifficulty;
+    private int _indexDifficulty = -1; //start at -1 to init in Start to 0
+
+    private void Start()
+    {
+        UpdateCurrentDiffitultyRange();
+    }
 
     // Update is called once per frame
     void Update()
     {
+        if (_currentSpawnDifficulty.difficultyRange.y < GameManager.Instance.Difficulty)
+        {
+            StopAllCoroutines();
+            UpdateCurrentDiffitultyRange();
+        }
+        
+        
         //For Debugging Key Spawn
         if (Input.GetKeyDown(KeyCode.K))
         {
-            Vector3 randomPosition = GetRandomSpawnPosition();
-            GameObject tmp = Instantiate(_enemyPrefab, randomPosition, quaternion.identity);
-            Vector3 dir = PlayerGameController.Instance.gameObject.transform.position - tmp.transform.position;
-            float angle = Mathf.Atan2(dir.y,dir.x) * Mathf.Rad2Deg;
-            tmp.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            //tmp.transform.LookAt(PlayerGameController.Instance.gameObject.transform);
+            SpawnEnemy();
         }
+    }
+
+    private void UpdateCurrentDiffitultyRange()
+    {
+        _indexDifficulty++;
+        _currentSpawnDifficulty = _spawnDifficulties[_indexDifficulty];
+        _enemyPrefab = _currentSpawnDifficulty.enemyPrefab;
+        StartCoroutine(SpawnEnemysTimed(_currentSpawnDifficulty.spawnFrequenzy));
+    }
+
+    private void SpawnEnemy()
+    {
+        Vector3 randomPosition = GetRandomSpawnPosition();
+        GameObject tmp = Instantiate(_enemyPrefab, randomPosition, quaternion.identity);
+        Vector3 dir = PlayerGameController.Instance.gameObject.transform.position - tmp.transform.position;
+        float angle = Mathf.Atan2(dir.y,dir.x) * Mathf.Rad2Deg;
+        tmp.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
     private Vector3 GetRandomSpawnPosition()
@@ -40,6 +75,16 @@ public class EnemySpawner : MonoBehaviour
         return randomPosition;
     }
 
+
+    private IEnumerator SpawnEnemysTimed(float spawnFrequenzy)
+    {
+        while (true)
+        {
+            SpawnEnemy();
+            yield return new WaitForSeconds(spawnFrequenzy);
+        }
+    }
+    
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.magenta;

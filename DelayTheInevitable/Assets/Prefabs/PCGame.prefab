@@ -583,8 +583,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f96d1c5af9320304fb490fbf2dad140b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotSpeed: 200
-  _shootingCooldown: 1
+  _rotSpeed: 250
+  _shootingCooldown: 0.5
   _shieldCooldown: 15
   _projectilePrefab: {fileID: 3658909095234140360, guid: 0f7da4c2d33fddc46862df011d4f1786, type: 3}
   _projectileSpawnPosition: {fileID: 7857811323229695955}
@@ -728,10 +728,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc2abdcad93b0a74d91bfbd865d7ad27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 7625720192092769113, guid: 104bd144ff258ae4fa1e4078b903fc6a, type: 3}
   _spawnAreaMin: {fileID: 4457274646725089356}
   _spawnAreaMax: {fileID: 3303871148101765769}
-  _distanceToPlayer: 2
+  _distanceToPlayer: 3
+  _spawnDifficulties:
+  - difficultyRange: {x: 0, y: 0.3}
+    spawnFrequenzy: 4
+    enemyPrefab: {fileID: 7625720192092769113, guid: 104bd144ff258ae4fa1e4078b903fc6a, type: 3}
+  - difficultyRange: {x: 0.3, y: 0.6}
+    spawnFrequenzy: 3
+    enemyPrefab: {fileID: 7625720192092769113, guid: 104bd144ff258ae4fa1e4078b903fc6a, type: 3}
+  - difficultyRange: {x: 0.6, y: 0.9}
+    spawnFrequenzy: 2
+    enemyPrefab: {fileID: 7625720192092769113, guid: 104bd144ff258ae4fa1e4078b903fc6a, type: 3}
+  - difficultyRange: {x: 0.9, y: 1}
+    spawnFrequenzy: 1
+    enemyPrefab: {fileID: 7625720192092769113, guid: 104bd144ff258ae4fa1e4078b903fc6a, type: 3}
 --- !u!1 &7857811324836082662
 GameObject:
   m_ObjectHideFlags: 0
