@@ -21,7 +21,8 @@ public class Projectile : MonoBehaviour
 
     void Update()
     {
-        if(_isFromPlayer){
+        if (_isFromPlayer)
+        {
             transform.Translate(Vector3.right * _speed * Time.deltaTime);
         }
         else
