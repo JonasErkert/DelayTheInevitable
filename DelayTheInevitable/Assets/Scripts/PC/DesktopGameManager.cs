@@ -110,6 +110,7 @@ public class DesktopGameManager : MonoBehaviour
     public void ResetProgress()
     {
         isWorkFinished = false;
+        keysPressed = 0;
         keyProgressSlider.value = 0;
         progressbarFillImage.color = Color.red;
     }

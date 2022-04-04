@@ -56,6 +56,11 @@ public class Boss : MonoBehaviour
 		CalcBossAppearancePause();
 		StartCoroutine(WaitBossAppearanceLoop());
 	}
+	
+	public void ResetBossDoor()
+	{
+		StopAllCoroutines();
+	}
 
 	private void PlayBossSteps()
 	{

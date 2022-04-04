@@ -47,20 +47,21 @@ public class GameManager : MonoBehaviour
 
     private GameState _gameState = GameState.Menu;
 
-    private PlayingManager playingManager;
+    [Header("Script Connections")]
+    [SerializeField] private Boss bossScript;
+    [SerializeField] private WorkCountdown countdownScript;
+    [SerializeField] private DesktopGameManager desktopManagerScript;
 
     public float Difficulty
     {
         get => _difficulty;
         set => _difficulty = Mathf.Clamp(value, 0, 1);
     }
-
-
+    
     // Start is called before the first frame update
     void Start()
     {
         DontDestroyOnLoad(this);
-        playingManager = GetComponent<PlayingManager>();
 
         SetGameState(GameState.Menu);
         BeginTimer();
@@ -73,6 +74,27 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1)) SetGameState(GameState.Menu);
         if (Input.GetKeyDown(KeyCode.Alpha2)) SetGameState(GameState.Playing);
         if (Input.GetKeyDown(KeyCode.Alpha3)) SetGameState(GameState.GameOver);
+
+        if (desktopManagerScript.isWorkFinished && countdownScript.hasTimerFinished)
+        {
+            countdownScript.ResetTimer();
+            countdownScript.BeginTimer();
+
+            desktopManagerScript.ResetProgress();
+        }
+        else
+        {
+            if (countdownScript.hasTimerFinished)
+            {
+                SetGameState(GameState.GameOver);
+            }
+            else
+            {
+                if (desktopManagerScript.isWorkFinished)
+                {
+                }
+            }
+        }
     }
 
 
@@ -81,13 +103,13 @@ public class GameManager : MonoBehaviour
         switch (state)
         {
             case GameState.Menu:
-
+                StartMenuState();
                 break;
             case GameState.Playing:
-                playingManager.StartPlayState();
+                StartPlayState();
                 break;
             case GameState.GameOver:
-
+                ResetPlayState();
                 break;
         }
 
@@ -95,7 +117,24 @@ public class GameManager : MonoBehaviour
     }
     public GameState GetGameState() { return _gameState; }
 
+    public void StartMenuState()
+    {
+        // TODO
+    }
+    
+    public void StartPlayState()
+    {
+        bossScript.StartBossDoor();
+        countdownScript.BeginTimer();
+    }
 
+    public void ResetPlayState()
+    {
+        Difficulty = 0;
+        countdownScript.ResetTimer();
+        bossScript.ResetBossDoor();
+    }
+    
     public void BeginTimer()
     {
         _timerRunning = true;
