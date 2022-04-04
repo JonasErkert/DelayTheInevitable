@@ -394,7 +394,7 @@ GameObject:
   - component: {fileID: 9150896388831382725}
   - component: {fileID: 3097779672710667167}
   - component: {fileID: 1311246365191804984}
-  - component: {fileID: 840976714}
+  - component: {fileID: 2838806845261344312}
   m_Layer: 0
   m_Name: RestartButton
   m_TagString: Untagged
@@ -516,25 +516,35 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!95 &840976714
-Animator:
-  serializedVersion: 3
+--- !u!114 &2838806845261344312
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1828476450161902425}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7d1beab869b02ac4daf3265ecde02315, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5330668676953514780}
+          m_TargetAssemblyTypeName: MenuUI, Assembly-CSharp
+          m_MethodName: MouseEnterButton
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 4077263106385555388}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.RectTransform, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &6326297993331991852
 GameObject:
   m_ObjectHideFlags: 0
@@ -547,6 +557,7 @@ GameObject:
   - component: {fileID: 103053757585191772}
   - component: {fileID: 5850296860228962179}
   - component: {fileID: 8786118896419615847}
+  - component: {fileID: 7415654430351616232}
   m_Layer: 0
   m_Name: QuitButton
   m_TagString: Untagged
@@ -668,6 +679,35 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &7415654430351616232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6326297993331991852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5330668676953514780}
+          m_TargetAssemblyTypeName: MenuUI, Assembly-CSharp
+          m_MethodName: MouseEnterButton
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 5603945136101420692}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.RectTransform, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &8380438444695057896
 GameObject:
   m_ObjectHideFlags: 0
@@ -948,6 +988,7 @@ GameObject:
   - component: {fileID: 9190710772776574965}
   - component: {fileID: 9190710772776574962}
   - component: {fileID: 9190710772776574963}
+  - component: {fileID: 5330668676953514780}
   m_Layer: 0
   m_Name: 2DCanvas
   m_TagString: Untagged
@@ -1037,6 +1078,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &5330668676953514780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9190710772776574961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 026d39a7b2299fd4ba12d9a039402bec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9190710772993064723
 GameObject:
   m_ObjectHideFlags: 0
