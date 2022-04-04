@@ -164,7 +164,7 @@ public class PlayerGameController : MonoBehaviour
         if(!_isShieldActive){
             _lifes -= damage;
             _lifeBarUI.fillAmount = _lifes / _startLifes;
-            if (_lifes <= 0.0f)
+            if (_lifes <= 0.0f && GameManager.Instance.GetGameState() == GameState.Playing)
             {
                 GameManager.Instance.SetGameOverReason(GameOverReason.GameLost);
             }

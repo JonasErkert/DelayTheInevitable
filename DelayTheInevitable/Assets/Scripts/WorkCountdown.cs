@@ -45,6 +45,7 @@ public class WorkCountdown : MonoBehaviour
     {
         StopAllCoroutines();
         timerText.text = _startTimeSpan.ToString("mm':'ss");
+        _timerRunning = false;
         hasTimerFinished = false;
     }
 

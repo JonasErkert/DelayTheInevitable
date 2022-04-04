@@ -95,9 +95,9 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         // Debugging:
-        if (Input.GetKeyDown(KeyCode.Alpha1)) SetGameState(GameState.Menu);
-        if (Input.GetKeyDown(KeyCode.Alpha2)) SetGameState(GameState.Playing);
-        if (Input.GetKeyDown(KeyCode.Alpha3)) SetGameState(GameState.GameOver);
+        //if (Input.GetKeyDown(KeyCode.Alpha1)) SetGameState(GameState.Menu);
+        //if (Input.GetKeyDown(KeyCode.Alpha2)) SetGameState(GameState.Playing);
+        //if (Input.GetKeyDown(KeyCode.Alpha3)) SetGameState(GameState.GameOver);
 
         if (_isDescriptionOpen)
         {
