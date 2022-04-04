@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class PlayerGameController : MonoBehaviour
 {
@@ -16,6 +18,12 @@ public class PlayerGameController : MonoBehaviour
     [SerializeField] private Image _lifeBarUI;
     [SerializeField] private float _lifes = 10.0f;
 
+    [SerializeField] private TextMeshProUGUI _killCounterUI;
+
+    [Header("Audio")] [SerializeField] private AudioClip[] _audioClips;
+
+    private AudioSource _audioSource;
+    
     private int _enemyKills = 0;
     
 
@@ -45,7 +53,8 @@ public class PlayerGameController : MonoBehaviour
         {
             _instance = this;
         }
-        
+
+        _audioSource = GetComponent<AudioSource>();
         _shieldPrefab.transform.localScale = Vector3.zero;
         _startLifes = _lifes;
     }
@@ -77,6 +86,7 @@ public class PlayerGameController : MonoBehaviour
     {
         if (Time.time > _nextTimeToShoot)
         {
+            _audioSource.PlayOneShot(_audioClips[Random.Range(0,3)]);
             _nextTimeToShoot = Time.time + _shootingCooldown;
             GameObject tmpProjectile = Instantiate(_projectilePrefab,_projectileSpawnPosition.position,_projectileSpawnPosition.rotation);
             tmpProjectile.SendMessage("IsProjectileFromPlayer",true);
@@ -140,5 +150,6 @@ public class PlayerGameController : MonoBehaviour
     public void AddKillToCounter()
     {
         _enemyKills++;
+        _killCounterUI.text = _enemyKills.ToString();
     }
 }

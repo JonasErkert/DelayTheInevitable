@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
         _lifes -= damage;
         if (_lifes <= 0.0f)
         {
+            PlayerGameController.Instance.AddKillToCounter();
             Destroy(gameObject);
         }
     }
