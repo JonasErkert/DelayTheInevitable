@@ -207,6 +207,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lifes: 5
-  _fireRate: 2
+  _fireRate: 5
   _projectilePrefab: {fileID: 3658909095234140360, guid: 1953880686d608e4b9618c66929869ac, type: 3}
   _projectileSpawnPosition: {fileID: 477641433935645464}

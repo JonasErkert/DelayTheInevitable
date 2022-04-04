@@ -2664,16 +2664,16 @@ MonoBehaviour:
   _distanceToPlayer: 4
   _spawnDifficulties:
   - difficultyRange: {x: 0, y: 0.3}
-    spawnFrequenzy: 4
+    spawnFrequenzy: 6
     enemyPrefab: {fileID: 7625720192092769113, guid: 104bd144ff258ae4fa1e4078b903fc6a, type: 3}
   - difficultyRange: {x: 0.3, y: 0.6}
-    spawnFrequenzy: 3
+    spawnFrequenzy: 4
     enemyPrefab: {fileID: 7625720192092769113, guid: 104bd144ff258ae4fa1e4078b903fc6a, type: 3}
   - difficultyRange: {x: 0.6, y: 0.9}
-    spawnFrequenzy: 2
+    spawnFrequenzy: 3
     enemyPrefab: {fileID: 7625720192092769113, guid: 104bd144ff258ae4fa1e4078b903fc6a, type: 3}
   - difficultyRange: {x: 0.9, y: 1}
-    spawnFrequenzy: 1
+    spawnFrequenzy: 2
     enemyPrefab: {fileID: 7625720192092769113, guid: 104bd144ff258ae4fa1e4078b903fc6a, type: 3}
 --- !u!1 &7857811324836082662
 GameObject:
@@ -2896,7 +2896,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -195.3}
+  m_AnchoredPosition: {x: 0, y: -195.29999}
   m_SizeDelta: {x: 366.9678, y: 94.6089}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &3100232752583541239
