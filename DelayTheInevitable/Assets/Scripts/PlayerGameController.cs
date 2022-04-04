@@ -119,7 +119,7 @@ public class PlayerGameController : MonoBehaviour
         float elapsed = 0.0f;
         while (elapsed < duration)
         {
-            _shieldPrefab.transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one * 2, elapsed/duration);
+            _shieldPrefab.transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one * 0.6f, elapsed/duration);
             _shieldBarUI.fillAmount = Mathf.Lerp(0, 1, elapsed/duration);
             elapsed += Time.deltaTime;
             yield return null;
@@ -136,7 +136,7 @@ public class PlayerGameController : MonoBehaviour
         Debug.Log("done_Wait");
         while (elapsed < fadeDuration)
         {
-            _shieldPrefab.transform.localScale = Vector3.Lerp(Vector3.one * 2,Vector3.zero, elapsed/fadeDuration);
+            _shieldPrefab.transform.localScale = Vector3.Lerp(Vector3.one * 0.6f,Vector3.zero, elapsed/fadeDuration);
             _shieldBarUI.fillAmount = Mathf.Lerp(1, 0, elapsed/fadeDuration);
             elapsed += Time.deltaTime;
             yield return null;

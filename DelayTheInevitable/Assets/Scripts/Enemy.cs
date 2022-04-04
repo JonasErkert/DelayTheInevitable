@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private float _lifes = 10.0f;
+    [SerializeField] private float _lifes = 5.0f;
     [SerializeField] private float _fireRate = 1.5f;
     [SerializeField] private GameObject _projectilePrefab;
     [SerializeField] private Transform _projectileSpawnPosition;
