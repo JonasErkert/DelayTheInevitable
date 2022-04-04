@@ -68,7 +68,6 @@ public class DesktopGameManager : MonoBehaviour
 
     private void CheckForWriting()
     {
-        // TODO && GameState == Playing
         if (Input.anyKeyDown && !GameManager.Instance.gameScreenOpen && GameManager.Instance.GetGameState() == GameState.Playing && !hasTask)
         {
             if (caret != null)

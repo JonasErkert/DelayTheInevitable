@@ -40,6 +40,9 @@ public class GameManager : MonoBehaviour
     public bool gameScreenOpen = true;
     public bool isWorkingOnTask = false;
 
+    [Header("Events")]
+    [SerializeField] private Animator workMailAnimation;
+
     [Header("Timer")]
     [SerializeField] private float secondsToMaxDifficulty = 180f;
     [SerializeField] private TextMeshProUGUI timerText;
@@ -92,7 +95,7 @@ public class GameManager : MonoBehaviour
         {
             countdownScript.ResetTimer();
             countdownScript.BeginTimer();
-
+            workMailAnimation.SetTrigger("RollInMail");
             desktopManagerScript.ResetProgress();
         }
         else

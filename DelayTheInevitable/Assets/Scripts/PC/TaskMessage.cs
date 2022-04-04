@@ -14,16 +14,11 @@ public class TaskMessage : MonoBehaviour
 
     [SerializeField]
     private Image transparentImage;
-
-    [SerializeField]
-    private Animator mailMessage;
-
     public void StartTask(string message)
     {
         transparentImage.color = new Color(transparentImage.color.r, transparentImage.color.g, transparentImage.color.b, 0.5f);
         taskMessageText.text = message;
         taskMessageAnim.SetBool("isOpen", true);
-        mailMessage.SetTrigger("RollInMail");
     }
     public void StopTask()
     {
