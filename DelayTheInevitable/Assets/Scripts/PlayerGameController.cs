@@ -50,16 +50,16 @@ public class PlayerGameController : MonoBehaviour
     void Update()
     {
         if(GameManager.Instance.gameScreenOpen){
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.LeftArrow))
             {
                 transform.RotateAround(transform.position,Vector3.forward,_rotSpeed * Time.deltaTime);
             }
-            if (Input.GetKey(KeyCode.D))
+            if (Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.RightArrow))
             {
                 transform.RotateAround(transform.position,Vector3.back,_rotSpeed * Time.deltaTime);
             }
 
-            if (Input.GetKeyDown(KeyCode.W))
+            if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.UpArrow))
             {
                 Shoot();
             }
