@@ -812,6 +812,8 @@ MonoBehaviour:
   _lifeBarUI: {fileID: 4227730462817926077}
   _lifes: 100
   _killCounterUI: {fileID: 200862954}
+  _shieldUpTime: 2
+  _shieldFadeOutTime: 5
   _audioClips:
   - {fileID: 8300000, guid: bf7b1575aed58af4ba6daccef29b9224, type: 3}
   - {fileID: 8300000, guid: 6ad653e40ac201f46984c8b1107d3dfc, type: 3}
@@ -1050,7 +1052,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spawnAreaMin: {fileID: 4457274646725089356}
   _spawnAreaMax: {fileID: 3303871148101765769}
-  _distanceToPlayer: 3
+  _distanceToPlayer: 4
   _spawnDifficulties:
   - difficultyRange: {x: 0, y: 0.3}
     spawnFrequenzy: 4

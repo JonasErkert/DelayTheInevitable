@@ -20,6 +20,10 @@ public class PlayerGameController : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI _killCounterUI;
 
+    [Header("Shield Settings")] 
+    [SerializeField] private float _shieldUpTime = 2.0f;
+    [SerializeField] private float _shieldFadeOutTime = 5.0f;
+    
     [Header("Audio")] [SerializeField] private AudioClip[] _audioClips;
 
     private AudioSource _audioSource;
@@ -80,6 +84,12 @@ public class PlayerGameController : MonoBehaviour
                 UseShield();
             }
         }
+
+        if (!_isShieldActive)
+        {
+            float buffer =  _nextTimeToShield - Time.time;
+            _shieldBarUI.fillAmount = 1 - buffer;
+        }
     }
 
     private void Shoot()
@@ -110,12 +120,12 @@ public class PlayerGameController : MonoBehaviour
         while (elapsed < duration)
         {
             _shieldPrefab.transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one * 2, elapsed/duration);
-            _shieldBarUI.fillAmount = Mathf.Lerp(0, 1, elapsed);
+            _shieldBarUI.fillAmount = Mathf.Lerp(0, 1, elapsed/duration);
             elapsed += Time.deltaTime;
             yield return null;
         }
         Debug.Log("done");
-        StartCoroutine(ActiveShield(2, 8));
+        StartCoroutine(ActiveShield(_shieldUpTime, _shieldFadeOutTime));
     }
     
     IEnumerator ActiveShield(float waitDuration, float fadeDuration)
@@ -142,7 +152,7 @@ public class PlayerGameController : MonoBehaviour
             _lifeBarUI.fillAmount = _lifes / _startLifes;
             if (_lifes <= 0.0f)
             {
-                //TODO: Broadcast player died in the GameGame
+                GameManager.Instance.SetGameState(GameState.GameOver);
             }
         }
     }
