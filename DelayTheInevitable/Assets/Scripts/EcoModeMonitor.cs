@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class EcoModeMonitor : MonoBehaviour
 {
     [SerializeField] private Image monitorScreen;
-    [SerializeField] private Light indicatorLight;
+    [SerializeField] private SpriteRenderer indicatorLight;
     [SerializeField] private float fadeDuration = 2.0f;
     private bool isInEcoMode = false;
 
