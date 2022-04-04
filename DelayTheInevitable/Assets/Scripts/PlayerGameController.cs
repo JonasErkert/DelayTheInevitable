@@ -16,7 +16,7 @@ public class PlayerGameController : MonoBehaviour
     [SerializeField] private GameObject _shieldPrefab;
     [SerializeField] private Image _shieldBarUI;
     [SerializeField] private Image _lifeBarUI;
-    [SerializeField] private float _lifes = 10.0f;
+    [SerializeField] private float _lifes = 100.0f;
 
     public float Lifes => _lifes;
 
@@ -156,7 +156,7 @@ public class PlayerGameController : MonoBehaviour
             _lifeBarUI.fillAmount = _lifes / _startLifes;
             if (_lifes <= 0.0f)
             {
-                GameManager.Instance.SetGameState(GameState.GameOver);
+                GameManager.Instance.SetGameOverReason(GameOverReason.GameLost);
             }
         }
     }
