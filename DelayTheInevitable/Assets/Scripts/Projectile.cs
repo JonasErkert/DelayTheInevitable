@@ -49,7 +49,7 @@ public class Projectile : MonoBehaviour
         if (collision.gameObject.tag == "EnemyProjectile" && _isFromPlayer)
         {
             Destroy(collision.gameObject);
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 }
