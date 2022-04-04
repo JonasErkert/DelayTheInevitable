@@ -156,7 +156,7 @@ public class PlayerGameController : MonoBehaviour
             _lifeBarUI.fillAmount = _lifes / _startLifes;
             if (_lifes <= 0.0f)
             {
-                GameManager.Instance.SetGameState(GameState.GameOver);
+                GameManager.Instance.SetGameOverReason(GameOverReason.GameLost);
             }
         }
     }
